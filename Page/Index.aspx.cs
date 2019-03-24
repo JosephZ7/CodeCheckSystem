@@ -9,6 +9,8 @@ using System.Text;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace CodeCheck
 {
@@ -107,14 +109,14 @@ namespace CodeCheck
         public void OutputOneDone(int type, string str, List<VN> va)
         {
             VN tvn = new VN();
-            
+
             if (IsKeyword(str) != 0)
             {
                 Init_last();
                 Keyword = str;
                 return;
             }
-            
+
             switch (type)
             {
 
@@ -157,12 +159,11 @@ namespace CodeCheck
                         }
                         else
                         {
-                            if (ma.ContainsKey(Identifier) == false)
-                            {
-                                ma.Add(Identifier, 0);
-                            }
+
                             tvn.name = str;
                             tvn.layer = Layer;
+                            if (ma.ContainsKey(Identifier) == false)
+                                break;
                             if (Operator == "++")
                                 va[ma[Identifier]].items[4]++;
                             else if (Operator == "--")
@@ -179,19 +180,18 @@ namespace CodeCheck
                             {
                                 tvn.name = Identifier;
                                 tvn.layer = Layer;
-                                if (ma[Identifier] != 0)
+                                if (ma.ContainsKey(Identifier) == true)
                                     return;
-                                if (ma.ContainsKey(Identifier) == false)
-                                {
+                                else
                                     ma.Add(Identifier, 0);
-                                }
+                                if (va.Count == 0)
+                                    va.Add(new VN());
                                 if (str[0] == '+')
                                     va[ma[Identifier]].items[4]++;
                                 else
                                     va[ma[Identifier]].items[5]++;
                                 Identifier = "";
                                 Operator = "";
-
                             }
                             else
                                 Operator += str[0];
@@ -200,7 +200,7 @@ namespace CodeCheck
                         {
                             if (str[0] == '=' && Operator == "")
                             {
-                                if(ma.ContainsKey(Identifier) == false)
+                                if (ma.ContainsKey(Identifier) == false)
                                 {
                                     ma.Add(Identifier, 0);
                                 }
@@ -524,8 +524,6 @@ namespace CodeCheck
         {
             Init_last();
             va.Clear();
-            VN tmp = new VN();
-            va.Add(tmp);
             Layer = 1;
             StreamReader input = new StreamReader(path);
             LexAnalyse(input, va);
@@ -886,13 +884,10 @@ namespace CodeCheck
         
     }
 
-
     public partial class Index : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CurrentUser"] != null)
-                btnToReg.Text = Session["CurrentUser"].ToString();
         }
 
         protected void bt_upload_Click(object sender, EventArgs e)
@@ -928,7 +923,6 @@ namespace CodeCheck
                 TOKEN GenerateToken = new TOKEN();
                 Sim CalculateSimScore = new Sim();
                 DFA CalculateDFAScore = new DFA();
-
                 List<VN> Markfile1 = new List<VN>();
                 List<VN> Markfile2 = new List<VN>();
 
@@ -938,20 +932,10 @@ namespace CodeCheck
                 double SimScore = CalculateSimScore.Sim_Run(GenerateToken.Read_file(files[0]), GenerateToken.Read_file(files[1]));
                 double DFAScore = CalculateDFAScore.Get_varsim(Markfile1, Markfile2);
 
-                double TotalScore = DFAScore * 0.6 + SimScore * 0.4;
+                double TotalScore = DFAScore * 0.4 + SimScore * 0.6;
                 //System.Diagnostics.Debug.WriteLine(Markfile1.Count());
                 lb_info.Text = TotalScore.ToString() + "%";
             }
-        }
-
-        protected void Login_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("User.aspx");
-        }
-
-        protected void Register_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Register.aspx");
         }
     }  
 }

@@ -236,8 +236,6 @@
                             <asp:Button ID="bt_excute" class="btn btn-lg btn-squared btn-base" runat="server" OnClick="bt_excute_Click" Text="运行" />
                         </td>
                         <td style="width: 100px; height: 21px">
-                            <asp:LinkButton runat="server" class="btn btn-lg btn-squared btn-base text-uppercase smooth-scroll" OnClick="Register_Click" ID="btnToReg">注册</asp:LinkButton>
-                            <asp:LinkButton runat="server" class="btn btn-lg btn-squared btn-base text-uppercase smooth-scroll" OnClick="Login_Click" ID="btnToLog">登录</asp:LinkButton>
                         </td>
                     </tr>
                     <tr>
@@ -268,7 +266,7 @@
 						以下是更详细的说明
 					</div>
 				</header>
-			</div>
+			</div>  
 		</div>
 		<!-- /Section Header -->
 

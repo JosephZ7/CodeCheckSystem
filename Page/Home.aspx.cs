@@ -11,18 +11,7 @@ namespace CodeCheck.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CurrentUser"] != null)
-                btnToReg.Text = Session["CurrentUser"].ToString();
-        }
 
-        protected void Unnamed1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("User.aspx");
-        }
-
-        protected void Unnamed2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Register.aspx");
         }
     }
 }

@@ -1,186 +1,100 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="CodeCheck.Page.Register" %>
 
 <!DOCTYPE html>
+<html lang="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>注册</title>
-    <style>
-        form {
-            color: #575454;
-            width: 500px;
-            margin: 20px auto;
-            font-size: 15px;
-        }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <title></title>
+   <link href="assets/css/icons.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/responsive.css" rel="stylesheet">
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="js/html5shiv.min.js"></script>
+          <script src="js/respond.min.js"></script>
+    <![endif]-->
 
-        .label {
-            color: red;
-            font-size: 12px;
-            font-family: 'Lucida Console';
-        }
-
-        input.Tb {
-            border-radius: 5px;
-        }
-
-        .user_name {
-            width: 240px;
-            height: 38px;
-            line-height: 38px;
-            border: 1px solid #000;
-            background: url(login_img_03.png) no-repeat left center;
-            padding-left: 30px;
-        }
-
-        .user_name input {
-            width: 230px;
-            height: 36px;
-            border: 1px solid #fff;
-            color: #666;
-        }
-
-        .password {
-            width: 240px;
-            height: 38px;
-            line-height: 38px;
-            border: 1px solid #dfe1e8;
-            background: url(login_img_09.png) no-repeat left center;
-            padding-left: 30px;
-        }
-
-        .password input {
-            width: 230px;
-            height: 36px;
-            border: 1px solid #000;
-            color: #666;
-        }
-
-        .transButton {
-            border: solid 1px;
-            background-color: transparent;
-        }
-
-        #btnRegister {
-            font-size: 14px;
-        }
-
-        #linkToLogin {
-            text-decoration: none
-        }
-
-        #ckItem {
-            text-decoration: none
-        }
-
-        body {
-            background-image: url("E:\ProgramFiles\CodeCheckSystem\CodeCheck\CodeCheck\Page\assets\images\default\bg-carousel-01.jpg");
-            
-        }
-    </style>
 </head>
 
 <body>
-    <form id="form1" runat="server">
-        <h2>欢迎注册OA</h2>
-        <h3>每一天，记录美。</h3>
-        <br />
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-        </asp:ScriptManager>
-        <asp:TextBox runat="server" ID="rUserNameText" Height="40px" Width="490px" CssClass="Tb"></asp:TextBox>
-        <br />
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
-                <asp:CustomValidator ID="CustomValidator1" runat="server"
-                    ControlToValidate="rUserNameText" ErrorMessage="*"
-                    OnServerValidate="CustomValidator1_ServerValidate">
-                </asp:CustomValidator>
-            </ContentTemplate>
 
-        </asp:UpdatePanel>
-        <br />
-        <asp:TextBox runat="server" ID="rPsdText" TextMode="Password" Height="40px" Width="490px" CssClass="Tb"></asp:TextBox>
-        <br />
-        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-            <ContentTemplate>
-                <asp:CustomValidator ID="CustomValidator2" runat="server"
-                    ControlToValidate="rPsdText" ErrorMessage="*"
-                    OnServerValidate="CustomValidator2_ServerValidate">
-                </asp:CustomValidator>
-            </ContentTemplate>
 
-        </asp:UpdatePanel>
-        <br />
-        <asp:TextBox runat="server" ID="rrPsdText" TextMode="Password" Height="40px" Width="490px" CssClass="Tb"></asp:TextBox>
-        <br />
-        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-            <ContentTemplate>
-                <asp:CustomValidator ID="CustomValidator3" runat="server"
-                    ControlToValidate="rrPsdText" ErrorMessage="*"
-                    OnServerValidate="CustomValidator3_ServerValidate">
-                </asp:CustomValidator>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <br />
-        <table>
-            <tr>
-                <td>
-                    <asp:CheckBox ID="CheckBox1" runat="server" Checked="true" />
-                </td>
-                <td>
-                    <span>同意</span>
-                    <asp:LinkButton runat="server" Text="服务条款" ID="ckItem"></asp:LinkButton>
-                </td>
-                <td></td>
-                <td>
-                    <asp:LinkButton ID="linkToLogin" runat="server" Text="已有账号?登录" OnClick="LinkToLogin_Click"></asp:LinkButton>
-                </td>
-            </tr>
-        </table>
-        <asp:Button ID="btnRegister" runat="server" CssClass="transButton" Height="49px" Text="注    册" Width="500px" OnClick="btnRegister_Click" />
-    </form>
+ <!--Start login Section-->
+  <section class="login-section">
+       <div class="container">
+           <div class="row">
+               <div class="login-wrapper">
+                   <div class="login-inner">
+                       
+                       <div class="logo">
+                         <img src="assets/images/logo-dark.png"  alt="logo"/>
+                       </div>
+                   		
+                   		<h2 class="header-title text-center">Sign Up</h2>
+                        
+                       <form>
+                           <div class="form-group">
+                               <input type="text" class="form-control"  placeholder="Email"><asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Email 格式不对！" ValidationExpression=" /^\s*[_a-z0-9]+@([_a-z0-9]+\.)+[a-z0-9]{2,3}\s*"></asp:RegularExpressionValidator>
+                           </div>
+                           
+                           <div class="form-group">
+                               <input type="text" class="form-control"  placeholder="Username" >
+                           </div>
+
+                           <div class="form-group">
+                               <input type="text" class="form-control"  placeholder="Password" >
+                           </div>
+
+						<div class="form-group">
+                           <div class="pull-left">
+                               <div class="checkbox primary">
+                              <input  id="checkbox-1" type="checkbox">
+                              <label for="checkbox-1">I accept <a href="#">Terms and Conditions</a></label>
+                            </div>
+                           </div>
+                         </div>
+                          
+                           <div class="form-group">
+                               <input type="submit" value="Sign Up" class="btn btn-primary btn-block">
+                           </div>
+                           
+                           <div class="form-group text-center">
+                            Already have an account?  <a href="Login.aspx">Sign In </a>
+                           </div>
+                           
+                       </form>
+                       
+                        <div class="copy-text"> 
+                         <p class="m-0">2017 &copy; Meter admin</p>
+                        </div>
+                    
+                   </div>
+               </div>
+               
+           </div>
+       </div>
+  </section>
+ <!--End login Section-->
+
+    <!--Begin core plugin -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/moment/moment.js"></script>
+    <script  src="assets/js/jquery.slimscroll.js "></script>
+    <script src="assets/js/jquery.nicescroll.js"></script>
+    <script src="assets/js/functions.js"></script>
+    <!-- End core plugin -->
+       
+
 </body>
 
-<script type="text/javascript">  
-    function watermark(id, value) {
-        var obj = document.getElementById(id);
-        var isPsdMode = false;
-        if (obj.type == "password") {
-            obj.type = "text";
-            isPsdMode = true;
-        }
-        obj.value = value;
-        obj.style.color = "Gray";
-        //获取焦点事件  
-        obj.onfocus = function () {
-
-            obj.style.color = "Black";
-            if (isPsdMode) {
-                obj.type = "password";
-            }
-            if (this.value == value) {
-                this.value = '';
-            }
-        };
-        //失去焦点事件  
-        obj.onblur = function () {
-            if (this.value == "") {
-                if (isPsdMode) {
-                    obj.type = "text";
-                }
-                this.value = value;
-                obj.style.color = "Gray";
-            }
-            else {
-                obj.style.color = "Black";
-            }
-        };
-    }
-    window.onload = function () {
-        var arr = [{ 'id': 'rUserNameText', 'desc': '用户名' }, { 'id': 'rPsdText', 'desc': '密码' }, { 'id': 'rrPsdText', 'desc': '确认密码' }];
-        for (var i = 0; i < arr.length; i++) {
-            watermark(arr[i].id, arr[i].desc);
-        }
-    };
-    </script>
 </html>
