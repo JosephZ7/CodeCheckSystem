@@ -128,7 +128,7 @@
 							<a href="#features" class="btn btn-lg btn-squared btn-white btn-o text-uppercase smooth-scroll">特性</a>
 						</div>
 						<div class="col-xs-6">
-							<a href="#CodeCheck" class="btn btn-lg btn-squared btn-base text-uppercase smooth-scroll">开始对比</a>
+							<a href="Login.aspx" class="btn btn-lg btn-squared btn-base text-uppercase smooth-scroll">登录</a>
 						</div>
 
 					</div>
@@ -215,36 +215,6 @@
 
 				<div class="h2 text-center pt no-margin text-white">选择文件或者文件夹进行查重</div>
 			</div>
-            <form id="form1" runat="server" method="post" enctype="multipart/form-data">
-                <table style="width: 343px">
-                    <tr>
-                        <td style="width: 100px">单文件上传</td>
-                        <td style="width: 100px"></td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100px">
-                            <asp:FileUpload ID="FileUpload1" runat="server" Width="475px" />
-                        </td>
-                        <td style="width: 100px">
-                            <asp:Button ID="bt_upload" class="btn btn-lg btn-squared btn-base" runat="server" OnClick="bt_upload_Click" Text="上传" />
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100px; height: 21px;">
-                            
-                            <asp:Button ID="bt_excute" class="btn btn-lg btn-squared btn-base" runat="server" OnClick="bt_excute_Click" Text="运行" />
-                        </td>
-                        <td style="width: 100px; height: 21px">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:Label ID="lb_info" runat="server" ForeColor="Red" Width="183px"></asp:Label>
-                        </td>
-                    </tr>
-                </table>
-            </form>
 		</div>
 		<!-- /Section Content -->
 

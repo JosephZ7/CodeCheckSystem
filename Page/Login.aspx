@@ -4,90 +4,77 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
-  <title></title>
-   <link href="assets/css/icons.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <title></title>
+    <link href="assets/css/icons.css" rel="stylesheet">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet">
-    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-          <script src="js/html5shiv.min.js"></script>
-          <script src="js/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body class="sticky-header">
 
- 
- <!--Start login Section-->
-  <section class="login-section">
-       <div class="container">
-           <div class="row">
-               <div class="login-wrapper">
-                   <div class="login-inner">
-                       
-                       <div class="logo">
-                         <img src="assets/images/logo-dark.png"  alt="logo"/>
-                       </div>
-                   		
-                   		<h2 class="header-title text-center">Login</h2>
-                        
-                       <form>
-                           <div class="form-group">
-                               <input type="text" class="form-control"  placeholder="Username" >
-                           </div>
-                           
-                           <div class="form-group">
-                               <input type="text" class="form-control"  placeholder="Password" >
-                           </div>
+    <!--Start login Section-->
+    <section class="login-section">
+        <div class="container">
+            <div class="row">
+                <div class="login-wrapper">
+                    <div class="login-inner">
 
-						<div class="form-group">
-                           <div class="pull-left">
-                            <div class="checkbox primary">
-                              <input  id="checkbox-2" type="checkbox">
-                              <label for="checkbox-2">Remember me</label>
+                        <h2 class="header-title text-center">Login</h2>
+
+                        <form runat="server">
+                            <div class="form-group">
+                                <asp:TextBox ID="TextBox1" runat="server" class="form-control" placeholder="Username"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="TextBox1" runat="server" ErrorMessage="只能中英文，数字，下划线，减号" ValidationExpression="^[\u4e00-\u9fa5A-Za-z0-9-_]*"></asp:RegularExpressionValidator>
                             </div>
-                           </div>
-                           
-                           <div class="pull-right">
-                           	   <a href="ResetPassword.aspx" class="a-link">
-                               <i class="fa fa-unlock-alt"></i> Forgot password?
-                               </a>
-                           </div>
-                         </div>
-                          
-                           <div class="form-group">
-                               <input type="submit" value="Login" class="btn btn-primary btn-block" >
-                           </div>
-                           
-                           <div class="form-group text-center">
-                            Don't have an account?  <a href="Register.aspx">Sign Up </a>
-                           </div>
-                           
-                       </form>
-                       
-                        <div class="copy-text"> 
-                         <p class="m-0">2017 &copy; Meter admin</p>
+
+                            <div class="form-group">
+                                <asp:TextBox ID="TextBox2" runat="server" class="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ControlToValidate="TextBox2" runat="server" ErrorMessage="以字母开头，长度在6-18之间，只能包含字符、数字和下划线。" ValidationExpression="^[a-zA-Z]\w{5,17}"></asp:RegularExpressionValidator>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="pull-left">
+                                    <div class="checkbox primary">
+                                        <input id="checkbox-2" type="checkbox">
+                                        <label for="checkbox-2">Remember me</label>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right">
+                                    <a href="ResetPassword.aspx" class="a-link">
+                                        <i class="fa fa-unlock-alt"></i>Forgot password?
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <asp:Button ID="Button1" runat="server" Text="Login" class="btn btn-primary btn-block" OnClick="Button1_Click" />
+                            </div>
+
+                            <div class="form-group text-center">
+                                Don't have an account?  <a href="Register.aspx">Sign Up </a>
+                            </div>
+
+                        </form>
+
+                        <div class="copy-text">
+                            <p class="m-0">2019 &copy; ZhouLei admin</p>
                         </div>
-                    
-                   </div>
-               </div>
-               
-           </div>
-       </div>
-  </section>
- <!--End login Section-->
 
+                    </div>
+                </div>
 
+            </div>
+        </div>
+    </section>
+    <!--End login Section-->
 
 
     <!--Begin core plugin -->

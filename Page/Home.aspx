@@ -20,14 +20,7 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-          <script src="js/html5shiv.min.js"></script>
-          <script src="js/respond.min.js"></script>
-    <![endif]-->
-
+    <link rel="stylesheet" href="assets/css/layui.css"  media="all">
 </head>
 
 <body class="sticky-header">
@@ -50,18 +43,17 @@
         <div class="left-side-inner">
             <!--Sidebar nav-->
             <ul class="nav nav-pills nav-stacked custom-nav">
-                <li class="menu-list nav-active"><a href="Home.aspx"><i class="icon-home"></i><span>Dashboard</span></a>
+                <li class="menu-list nav-active"><a href="Home.aspx"><i class="icon-home"></i><span>CodeCheck</span></a>
                     <ul class="sub-menu-list">
-                        <li class="active"><a href="Home.aspx">Dashboard 1</a></li>
-                        <li><a href="dashboard2.html">Dashboard 2</a></li>
+                        <li class="active"><a href="Home.aspx">CodeSimilarity</a></li>
                     </ul>
                 </li>
 
                 <li class="menu-list"><a href="#"><i class="icon-grid"></i><span>Tables</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="table-static.html">Basic Table</a></li>
-                        <li><a href="table-responsive.html">Responsive Table</a></li>
-                        <li><a href="table-datatable.html">Data Tables</a></li>
+                        <li><a href="Table-static.aspx">Basic Table</a></li>
+                        <li><a href="Table-responsive.aspx">Responsive Table</a></li>
+                        <li><a href="Table-datatable.aspx">Data Tables</a></li>
                     </ul>
                 </li>
 
@@ -101,7 +93,7 @@
                     <li>
                         <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                             <img src="assets/images/users/avatar-6.jpg" alt="" />
-                            Zhou Lei
+                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
@@ -125,156 +117,181 @@
 
             <!--Start Page Title-->
             <div class="page-title-box">
-                <h4 class="page-title">Dashboard1 </h4>
+                <h4 class="page-title">CodeSimilarity </h4>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-
-                    <li class="active">Dashboard 1
+                        <a href="#">CodeCheck</a>
                     </li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
             <!--End Page Title-->
 
-            <!--Start row-->
-            <div class="row">
-                <div class="container">
-                    <div class="analytics-box">
-                    </div>
-                </div>
-            </div>
-            <!--End row-->
+            <form action="#" id="Form1" enctype="multipart/form-data" runat="server" method="post">
+
 
             <!--Start row-->
             <div class="row">
-                <!--Start info box-->
-                <div class="col-md-3 col-sm-6">
-                    <div class="info-box-main">
-                        <div class="info-stats">
-                            <p>1250</p>
-                            <span>Total Sales </span>
-                        </div>
-                        <div class="info-icon text-primary ">
-                            <i class="mdi mdi-cart"></i>
-                        </div>
-                        <div class="info-box-progress">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" style="width: 48%;">
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-md-12">
+                    <div class="white-box">
+                        
                     </div>
                 </div>
-                <!--End info box-->
-
-                <!--Start info box-->
-                <div class="col-md-3 col-sm-6">
-                    <div class="info-box-main">
-                        <div class="info-stats">
-                            <p>2300</p>
-                            <span>Daily visitors</span>
-                        </div>
-                        <div class="info-icon text-info">
-                            <i class="mdi mdi-account-multiple"></i>
-                        </div>
-                        <div class="info-box-progress">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" style="width: 48%;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End info box-->
-
-                <!--Start info box-->
-                <div class="col-md-3 col-sm-6">
-                    <div class="info-box-main">
-                        <div class="info-stats">
-                            <p>5320</p>
-                            <span>Total Earning</span>
-                        </div>
-                        <div class="info-icon text-warning">
-                            <i class="fa fa-dollar"></i>
-                        </div>
-                        <div class="info-box-progress">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" style="width: 48%;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End info box-->
-
-                <!--Start info box-->
-                <div class="col-md-3 col-sm-6">
-                    <div class="info-box-main">
-                        <div class="info-stats">
-                            <p>65</p>
-                            <span>Pending Orders</span>
-                        </div>
-                        <div class="info-icon text-danger">
-                            <i class="mdi mdi-weight"></i>
-                        </div>
-                        <div class="info-box-progress">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100" style="width: 48%;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End info box-->
-
+                <div class="clear"></div>
             </div>
-            <!--End row-->
-
+            <!-- end row -->
 
 
             <!--Start row-->
             <div class="row">
                 <div class="col-md-6">
                     <div class="white-box">
-                        <h2 class="header-title">Sales Analytics</h2>
-                        <ul class="list-inline text-center m-t-10">
-                            <li>
-                                <h5><i class="fa fa-circle m-r-5" style="color: #98C1D1;"></i>Iphone</h5>
-                            </li>
-                            <li>
-                                <h5><i class="fa fa-circle m-r-5" style="color: #23DBDE;"></i>Ipad</h5>
-                            </li>
-                            <li>
-                                <h5><i class="fa fa-circle m-r-5" style="color: #F6DDA0;"></i>Itouch</h5>
-                            </li>
-                        </ul>
-                        <div id="morris-area-chart" style="height: 250px;"></div>
+                        <h2 class="header-title">Single File Check</h2>
+                        <div class="fallback">
+                            
+                            <input id="UpLoad" type="file" name="file" multiple="multiple"/>
+                            <asp:Button ID="bt_upload" class="btn btn-info" runat="server" OnClick="Bt_upload_Click" Text="上传" />
+                            <asp:Label ID="Upload_info" runat="server" ForeColor="Red" Width="300px"></asp:Label>
+                        </div>
+                        <br />
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox primary">
+                            <input type="checkbox" checked id="checkbox-2">
+                            <label for="checkbox-2">Primary</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox success">
+                            <input type="checkbox" checked id="checkbox-3">
+                            <label for="checkbox-3">Success</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox info">
+                            <input type="checkbox" id="checkbox-4">
+                            <label for="checkbox-4">Info</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox warning">
+                            <input type="checkbox" id="checkbox-5">
+                            <label for="checkbox-5">Warning</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox pink">
+                            <input type="checkbox" id="checkbox-8">
+                            <label for="checkbox-8">Pink</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox danger">
+                            <input type="checkbox" checked id="checkbox-6">
+                            <label for="checkbox-6">Danger</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox purple">
+                            <input type="checkbox" id="checkbox-7">
+                            <label for="checkbox-7">Purple</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox inverse">
+                            <input type="checkbox" checked id="checkbox-9">
+                            <label for="checkbox-9">Inverse</label>
+                        </div>
+
+                        
+                        <h4 class="header-title">Run Program</h4>
+                        <div class="button-wrap">
+                             
+                            <asp:Button ID="bt_excute" class="btn btn-primary" runat="server" OnClick="Bt_excute_Click" Text="运行" />
+
+                            <asp:Label ID="Excute_info" runat="server" ForeColor="Red" Width="183px"></asp:Label>
+                        </div>
                     </div>
                 </div>
 
 
                 <div class="col-md-6">
                     <div class="white-box">
-                        <h2 class="header-title">Total Revenue </h2>
-                        <ul class="list-inline text-center m-t-10">
-                            <li>
-                                <h5><i class="fa fa-circle m-r-5" style="color: #03A9F3;"></i>Section A</h5>
-                            </li>
-                            <li>
-                                <h5><i class="fa fa-circle m-r-5" style="color: #FFAA00;"></i>Section B</h5>
-                            </li>
-                        </ul>
-                        <div id="morris2" style="height: 250px;"></div>
+                        <h2 class="header-title">Multi Files Check</h2>
+                        <div class="fallback">
+                            <input id="UpLoad1" type="file" name="file" />
+                            <asp:Button ID="Button1" class="btn btn-info" runat="server" OnClick="Bt_upload_Click2" Text="上传" />
+                            <asp:Label ID="Label2" runat="server" ForeColor="Red" Width="300px"></asp:Label>
+                        </div>
+                        <br />
+                        <div id="slideTest9" class="demo-slider"></div>
+                        <br />
+                        <div id="test-slider-tips2" style="position:relative; left: 30px; margin-top: -10px;"></div>
+                        <br />
+                        <!-- /.checkbox -->
 
+                        <div class="checkbox circled primary">
+                            <input type="checkbox" checked id="checkbox-circled-2">
+                            <label for="checkbox-circled-2">Primary</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox circled success">
+                            <input type="checkbox" checked id="checkbox-circled-3">
+                            <label for="checkbox-circled-3">Success</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox circled info">
+                            <input type="checkbox" id="checkbox-circled-4">
+                            <label for="checkbox-circled-4">Info</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox circled warning">
+                            <input type="checkbox" id="checkbox-circled-5">
+                            <label for="checkbox-circled-5">Warning</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox circled danger">
+                            <input type="checkbox" checked id="checkbox-circled-6">
+                            <label for="checkbox-circled-6">Danger</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox circled purple">
+                            <input type="checkbox" id="checkbox-circled-7">
+                            <label for="checkbox-circled-7">Purple</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox circled pink">
+                            <input type="checkbox" id="checkbox-circled-8">
+                            <label for="checkbox-circled-8">Pink</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <div class="checkbox circled inverse">
+                            <input type="checkbox" checked id="checkbox-circled-9">
+                            <label for="checkbox-circled-9">Inverse</label>
+                        </div>
+                        <!-- /.checkbox -->
+
+                        <h4 class="header-title">Run Program</h4>
+                        <div class="button-wrap">
+                             
+                            <asp:Button ID="Button2" class="btn btn-purple" runat="server" OnClick="Bt_excute_Click2" Text="运行" />
+
+                            <asp:Label ID="Label3" runat="server" ForeColor="Red" Width="183px"></asp:Label>
+                        </div>
                     </div>
                 </div>
-                <!-- /col-md-6-->
-
-
+                <div class="clear"></div>
             </div>
-            <!--End row-->
+            <!-- end row -->
+            
+            </form>
         </div>
         <!-- End Wrapper-->
 
@@ -304,6 +321,23 @@
     <script src="assets/pages/dashboard.js"></script>
     <!--End Page Level Plugin-->
 
+    <script src="assets/layui.js" charset="utf-8"></script>
+    <script>
+          //开启范围选择
+        layui.use('slider', function () {
+            var $ = layui.$
+                , slider = layui.slider;
+            slider.render({
+                elem: '#slideTest9'
+                , value: 40 //初始值
+                , range: true //范围选择
+                , change: function (vals) {
+                    $('#test-slider-tips2').html('开始值：' + vals[0] + '、结尾值：' + vals[1]);
+                }
+            });
+        });
+        
+    </script>
 
 </body>
 

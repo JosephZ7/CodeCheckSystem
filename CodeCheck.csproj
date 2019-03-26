@@ -208,6 +208,9 @@
     <Content Include="Page\Login.aspx" />
     <Content Include="Page\Register.aspx" />
     <Content Include="Page\ResetPassword.aspx" />
+    <Content Include="Page\Table-datatable.aspx" />
+    <Content Include="Page\Table-responsive.aspx" />
+    <Content Include="Page\Table-static.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -260,13 +263,13 @@
     </Compile>
     <Compile Include="Page\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Page\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Page\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -298,6 +301,27 @@
     </Compile>
     <Compile Include="Page\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Table-datatable.aspx.cs">
+      <DependentUpon>Table-datatable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Table-datatable.aspx.designer.cs">
+      <DependentUpon>Table-datatable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Table-responsive.aspx.cs">
+      <DependentUpon>Table-responsive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Table-responsive.aspx.designer.cs">
+      <DependentUpon>Table-responsive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\Table-static.aspx.cs">
+      <DependentUpon>Table-static.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\Table-static.aspx.designer.cs">
+      <DependentUpon>Table-static.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
