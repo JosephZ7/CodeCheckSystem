@@ -131,6 +131,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Page\DownloadExcel.aspx" />
     <Content Include="Page\ForgotPassword.aspx" />
     <Content Include="Page\Home.aspx" />
     <Content Include="Page\Index.aspx" />
@@ -206,6 +207,7 @@
     <Content Include="Page\assets\js\scrollreveal.js" />
     <Content Include="Page\LockScreen.aspx" />
     <Content Include="Page\Login.aspx" />
+    <Content Include="Page\ProgressBar.html" />
     <Content Include="Page\Register.aspx" />
     <Content Include="Page\ResetPassword.aspx" />
     <Content Include="Page\Table-datatable.aspx" />
@@ -253,6 +255,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Page\DownloadExcel.aspx.cs">
+      <DependentUpon>DownloadExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Page\DownloadExcel.aspx.designer.cs">
+      <DependentUpon>DownloadExcel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page\ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
@@ -348,6 +357,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Files\" />
+    <Folder Include="SingleFile\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

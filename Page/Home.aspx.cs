@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -521,6 +526,7 @@ namespace CodeCheck.Page
         {
             Init_last();
             va.Clear();
+            ma.Clear();
             Layer = 1;
             StreamReader input = new StreamReader(path);
             LexAnalyse(input, va);
@@ -881,10 +887,28 @@ namespace CodeCheck.Page
 
     }
 
+    class CodeCheckResult
+    {
+        public string File1;
+        public string File2;
+        public string Similarity;
+
+        public CodeCheckResult(string v1, string v2, string v3)
+        {
+            this.File1 = v1;
+            this.File2 = v2;
+            this.Similarity = v3;
+        }
+    }
+
     public partial class Home : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
+            {
+                LinkButton1.Visible = false;
+            }
             if(Session["UserName"] != null)
             {
                 Label1.Text = Session["UserName"].ToString();
@@ -893,6 +917,7 @@ namespace CodeCheck.Page
             {
                 Response.Redirect("Login.aspx");
             }
+            
         }
 
         protected void Bt_upload_Click(object sender, EventArgs e)
@@ -903,7 +928,7 @@ namespace CodeCheck.Page
                 string type = FileName.Substring(FileName.LastIndexOf(".") + 1);
                 if (type == "cpp" || type == "java")
                 {
-                    Request.Files["file"].SaveAs(Server.MapPath("../Files/") + Path.GetFileName(Request.Files["file"].FileName));
+                    Request.Files["file"].SaveAs(Server.MapPath("../SingleFile/") + Path.GetFileName(Request.Files["file"].FileName));
                     Upload_info.Text = "上传成功！";
                 }
                 else
@@ -919,7 +944,7 @@ namespace CodeCheck.Page
 
         protected void Bt_excute_Click(object sender, EventArgs e)
         {
-            System.IO.DirectoryInfo DirInfo = new System.IO.DirectoryInfo(Server.MapPath("../Files/"));
+            System.IO.DirectoryInfo DirInfo = new System.IO.DirectoryInfo(Server.MapPath("../SingleFile/"));
             if (!DirInfo.Exists) return;
 
             System.IO.DirectoryInfo[] Dirs = DirInfo.GetDirectories();
@@ -952,19 +977,209 @@ namespace CodeCheck.Page
 
                 double TotalScore = DFAScore * 0.4 + SimScore * 0.6;
                 //System.Diagnostics.Debug.WriteLine(Markfile1.Count());
-                Excute_info.Text = "代码相似度：" + TotalScore.ToString() + "%";
+                Excute_info.Text = "  代码相似度：" + TotalScore.ToString() + "%";
             }
         }
         
 
         protected void Bt_upload_Click2(object sender, EventArgs e)
         {
+            if(FileUpload1.HasFile)
+            {
+                string folderPath = Server.MapPath("../Files/");
 
+                //Check whether Directory (Folder) exists.
+                if (!Directory.Exists(folderPath))
+                {
+                    //If Directory (Folder) does not exists. Create it.
+                    Directory.CreateDirectory(folderPath);
+                }
+                int count = 0;
+                HttpFileCollection UploadFiles = Request.Files;
+                for(int i = 0;i < UploadFiles.Count;i++)
+                {
+                    HttpPostedFile PostFiles = UploadFiles[i];
+                    try
+                    {
+                        if (PostFiles.ContentLength > 0)
+                        {
+                            Label2.Text += "文件 #" + (i + 1) + "：" + System.IO.Path.GetFileName(PostFiles.FileName) + " <br />";
+                            string FileName = PostFiles.FileName.Substring(PostFiles.FileName.LastIndexOf('/') + 1);
+                            string Extension = PostFiles.FileName.Substring(PostFiles.FileName.LastIndexOf('.') + 1);
+                            if (Extension.ToLower() == "cpp")
+                            {
+                                PostFiles.SaveAs(folderPath + System.IO.Path.GetFileName(PostFiles.FileName));
+                                count++;
+                            }
+                        }
+                    }
+                    catch (Exception Ex)
+                    {
+                        Label2.Text += "发生错误： " + Ex.Message;
+                    }
+                }
+                Label2.Text += count.ToString() + "个文件上传成功";
+            }
+            else
+            {
+                Label2.Text = "请上传文件夹。";
+            }
+        }
+
+        private void BeginProgress()
+        {
+            //根据ProgressBar.htm显示进度条界面
+            string templateFileName = Path.Combine(Server.MapPath("."), "ProgressBar.html");
+            StreamReader reader = new StreamReader(@templateFileName, System.Text.Encoding.GetEncoding("GB2312"));
+            string html = reader.ReadToEnd();
+            reader.Close();
+            Response.Write(html);
+            Response.Flush();
+        }
+
+        private void SetProgress(int percent)
+        {
+            string jsBlock = "<script>SetPorgressBar('" + percent.ToString() + "'); </script>";
+            Response.Write(jsBlock);
+            Response.Flush();
+        }
+
+        private void FinishProgress()
+        {
+            string jsBlock = "<script>SetCompleted();</script>";
+            Response.Write(jsBlock);
+            Response.Flush();
         }
 
         protected void Bt_excute_Click2(object sender, EventArgs e)
         {
+            System.IO.DirectoryInfo DirInfo = new System.IO.DirectoryInfo(Server.MapPath("../Files/"));
+            if (!DirInfo.Exists) return;
 
+            System.IO.DirectoryInfo[] Dirs = DirInfo.GetDirectories();
+            
+            //获取文件路径集合
+            FileInfo[] paths = DirInfo.GetFiles("*.cpp", SearchOption.AllDirectories);
+            List<string> files = new List<string>();
+            //循环paths 将每个文件信息放入List里
+            foreach (FileInfo filepath in paths)
+            {
+                files.Add(filepath.FullName);
+            }
+
+            if (paths.Count() <= 1)
+            {
+                Response.Write("<script>alert('相同类型的文件数少于两个')</script>");
+            }
+            else
+            {
+                //for(int i = 0;i < files.Count();i++)
+                //{
+                //    System.Diagnostics.Debug.WriteLine(files[i]);
+                //}
+                TOKEN GenerateToken = new TOKEN();
+                Sim CalculateSimScore = new Sim();
+                DFA CalculateDFAScore = new DFA();
+                List<CodeCheckResult> OutputExcel = new List<CodeCheckResult>();
+
+                BeginProgress();
+
+                int total = ((files.Count() - 1) * files.Count()) / 2;
+                int Counter = 0, Bar = 0;
+                for(int i = 0;i < files.Count(); ++i)
+                {
+                    for(int j = i + 1;j < files.Count(); ++j)
+                    {
+                        List<VN> Markfile1 = new List<VN>();
+                        List<VN> Markfile2 = new List<VN>();
+
+                        CalculateDFAScore.Get_VN(files[i], Markfile1);
+                        CalculateDFAScore.Get_VN(files[j], Markfile2);
+
+                        double SimScore = CalculateSimScore.Sim_Run(GenerateToken.Read_file(files[i]), GenerateToken.Read_file(files[j]));
+                        double DFAScore = CalculateDFAScore.Get_varsim(Markfile1, Markfile2);
+
+                        double TotalScore = DFAScore * 0.4 + SimScore * 0.6;
+                        // System.Diagnostics.Debug.WriteLine(TotalScore.ToString());
+                        
+                        Bar = (Counter) *100 / total;
+                        Counter++;
+                        SetProgress(Bar);
+                        System.Threading.Thread.Sleep(50);
+
+                        //System.Diagnostics.Debug.WriteLine(Bar.ToString());
+
+                        OutputExcel.Add(new CodeCheckResult(files[i].Substring(files[i].LastIndexOf('\\') + 1),files[j].Substring(files[j].LastIndexOf('\\') + 1), TotalScore.ToString() + "%"));
+                    }
+                }
+                FinishProgress();
+
+                DataTable d1 = new DataTable();
+                d1.Columns.Add("FileName1");
+                d1.Columns.Add("FileName2");
+                d1.Columns.Add("Similarity");
+                for (int i = 0;i < OutputExcel.Count();++i)
+                {
+                    d1.Rows.Add(OutputExcel[i].File1, OutputExcel[i].File2, OutputExcel[i].Similarity);
+                }
+
+                GridView1.DataSource = d1;
+                GridView1.DataBind();
+                LinkButton1.Visible = true;
+            }
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=CodeCheckResult.xls");
+            Response.Charset = "";
+            Response.ContentType = "application/vnd.ms-excel";
+            using (StringWriter sw = new StringWriter())
+            {
+                HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+                //To Export all pages
+                GridView1.AllowPaging = false;
+
+                GridView1.HeaderRow.BackColor = Color.White;
+                foreach (TableCell cell in GridView1.HeaderRow.Cells)
+                {
+                    cell.BackColor = GridView1.HeaderStyle.BackColor;
+                }
+                foreach (GridViewRow row in GridView1.Rows)
+                {
+                    row.BackColor = Color.White;
+                    foreach (TableCell cell in row.Cells)
+                    {
+                        if (row.RowIndex % 2 == 0)
+                        {
+                            cell.BackColor = GridView1.AlternatingRowStyle.BackColor;
+                        }
+                        else
+                        {
+                            cell.BackColor = GridView1.RowStyle.BackColor;
+                        }
+                        cell.CssClass = "textmode";
+                    }
+                }
+
+                GridView1.RenderControl(hw);
+
+                //style to format numbers to string
+                string style = @"<style> .textmode { } </style>";
+                Response.Write(style);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+            }
+        }
+
+
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            //base.VerifyRenderingInServerForm(control);
         }
     }
 }

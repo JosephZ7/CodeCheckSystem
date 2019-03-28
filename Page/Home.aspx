@@ -11,7 +11,6 @@
     <meta name="author" content="">
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <title>Home</title>
-
     <!--Begin  Page Level  CSS -->
     <link href="assets/plugins/morris-chart/morris.css" rel="stylesheet">
     <link href="assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
@@ -20,7 +19,6 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/layui.css"  media="all">
 </head>
 
 <body class="sticky-header">
@@ -132,84 +130,45 @@
 
             <!--Start row-->
             <div class="row">
-                <div class="col-md-12">
-                    <div class="white-box">
-                        
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <!-- end row -->
-
-
-            <!--Start row-->
-            <div class="row">
                 <div class="col-md-6">
                     <div class="white-box">
-                        <h2 class="header-title">Single File Check</h2>
+                        <h2 class="header-title">Single File Check（选择两个单文件对比）</h2>
                         <div class="fallback">
-                            
-                            <input id="UpLoad" type="file" name="file" multiple="multiple"/>
-                            <asp:Button ID="bt_upload" class="btn btn-info" runat="server" OnClick="Bt_upload_Click" Text="上传" />
-                            <asp:Label ID="Upload_info" runat="server" ForeColor="Red" Width="300px"></asp:Label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input id="UpLoad" type="file" name="file" multiple="multiple" />
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="bt_upload" class="btn btn-info" runat="server" OnClick="Bt_upload_Click" Text="上传" />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="Upload_info" runat="server" ForeColor="Red" Width="300px"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <br />
                         <!-- /.checkbox -->
-
+                        <p>下列勾选查重的语言</p>
                         <div class="checkbox primary">
                             <input type="checkbox" checked id="checkbox-2">
-                            <label for="checkbox-2">Primary</label>
+                            <label for="checkbox-2">C++</label>
                         </div>
                         <!-- /.checkbox -->
 
                         <div class="checkbox success">
                             <input type="checkbox" checked id="checkbox-3">
-                            <label for="checkbox-3">Success</label>
+                            <label for="checkbox-3">Java</label>
                         </div>
                         <!-- /.checkbox -->
-
-                        <div class="checkbox info">
-                            <input type="checkbox" id="checkbox-4">
-                            <label for="checkbox-4">Info</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox warning">
-                            <input type="checkbox" id="checkbox-5">
-                            <label for="checkbox-5">Warning</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox pink">
-                            <input type="checkbox" id="checkbox-8">
-                            <label for="checkbox-8">Pink</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox danger">
-                            <input type="checkbox" checked id="checkbox-6">
-                            <label for="checkbox-6">Danger</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox purple">
-                            <input type="checkbox" id="checkbox-7">
-                            <label for="checkbox-7">Purple</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox inverse">
-                            <input type="checkbox" checked id="checkbox-9">
-                            <label for="checkbox-9">Inverse</label>
-                        </div>
-
                         
                         <h4 class="header-title">Run Program</h4>
                         <div class="button-wrap">
                              
                             <asp:Button ID="bt_excute" class="btn btn-primary" runat="server" OnClick="Bt_excute_Click" Text="运行" />
 
-                            <asp:Label ID="Excute_info" runat="server" ForeColor="Red" Width="183px"></asp:Label>
+                            <asp:Label ID="Excute_info" runat="server" ForeColor="Red"></asp:Label>
                         </div>
                     </div>
                 </div>
@@ -217,64 +176,34 @@
 
                 <div class="col-md-6">
                     <div class="white-box">
-                        <h2 class="header-title">Multi Files Check</h2>
+                        <h2 class="header-title">Multi Files Check（对文件夹里的所有文件对比）</h2>
                         <div class="fallback">
-                            <input id="UpLoad1" type="file" name="file" />
-                            <asp:Button ID="Button1" class="btn btn-info" runat="server" OnClick="Bt_upload_Click2" Text="上传" />
-                            <asp:Label ID="Label2" runat="server" ForeColor="Red" Width="300px"></asp:Label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <asp:FileUpload ID="FileUpload1" runat="server" webkitdirectory=""  />
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="Button1" class="btn btn-info" runat="server" OnClick="Bt_upload_Click2" Text="上传" />
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="Label2" runat="server" ForeColor="Red" Width="300px"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <br />
-                        <div id="slideTest9" class="demo-slider"></div>
-                        <br />
-                        <div id="test-slider-tips2" style="position:relative; left: 30px; margin-top: -10px;"></div>
-                        <br />
                         <!-- /.checkbox -->
-
+                        <br />
+                        <p>下列勾选查重的语言</p>
                         <div class="checkbox circled primary">
                             <input type="checkbox" checked id="checkbox-circled-2">
-                            <label for="checkbox-circled-2">Primary</label>
+                            <label for="checkbox-circled-2">C++</label>
                         </div>
                         <!-- /.checkbox -->
 
                         <div class="checkbox circled success">
                             <input type="checkbox" checked id="checkbox-circled-3">
-                            <label for="checkbox-circled-3">Success</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox circled info">
-                            <input type="checkbox" id="checkbox-circled-4">
-                            <label for="checkbox-circled-4">Info</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox circled warning">
-                            <input type="checkbox" id="checkbox-circled-5">
-                            <label for="checkbox-circled-5">Warning</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox circled danger">
-                            <input type="checkbox" checked id="checkbox-circled-6">
-                            <label for="checkbox-circled-6">Danger</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox circled purple">
-                            <input type="checkbox" id="checkbox-circled-7">
-                            <label for="checkbox-circled-7">Purple</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox circled pink">
-                            <input type="checkbox" id="checkbox-circled-8">
-                            <label for="checkbox-circled-8">Pink</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox circled inverse">
-                            <input type="checkbox" checked id="checkbox-circled-9">
-                            <label for="checkbox-circled-9">Inverse</label>
+                            <label for="checkbox-circled-3">Java</label>
                         </div>
                         <!-- /.checkbox -->
 
@@ -282,15 +211,20 @@
                         <div class="button-wrap">
                              
                             <asp:Button ID="Button2" class="btn btn-purple" runat="server" OnClick="Bt_excute_Click2" Text="运行" />
-
-                            <asp:Label ID="Label3" runat="server" ForeColor="Red" Width="183px"></asp:Label>
+                            <asp:LinkButton ID="LinkButton1" runat="server" class="btn btn-success" OnClick="LinkButton1_Click">下载结果</asp:LinkButton>
                         </div>
                     </div>
                 </div>
                 <div class="clear"></div>
             </div>
             <!-- end row -->
-            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+                    </div>
+                </div>
+            </div>
             </form>
         </div>
         <!-- End Wrapper-->
@@ -320,24 +254,6 @@
     <script src="assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="assets/pages/dashboard.js"></script>
     <!--End Page Level Plugin-->
-
-    <script src="assets/layui.js" charset="utf-8"></script>
-    <script>
-          //开启范围选择
-        layui.use('slider', function () {
-            var $ = layui.$
-                , slider = layui.slider;
-            slider.render({
-                elem: '#slideTest9'
-                , value: 40 //初始值
-                , range: true //范围选择
-                , change: function (vals) {
-                    $('#test-slider-tips2').html('开始值：' + vals[0] + '、结尾值：' + vals[1]);
-                }
-            });
-        });
-        
-    </script>
 
 </body>
 
