@@ -749,7 +749,6 @@ namespace CodeCheck.Page
                     }
                     if (i < line.Length && IsWord(line[i].ToString()))                          // [A-Za-z][A-Za-z0-9],Start with a letter
                     {
-                        p += line[i];
                         while (i < line.Length)
                         {
                             if (!(IsNumeric(line[i].ToString()) || IsWord(line[i].ToString()) || line[i] == '_'))    //Is a word, numeric, _
@@ -764,7 +763,6 @@ namespace CodeCheck.Page
                     }
                     if (i < line.Length && IsNumeric(line[i].ToString()))                   // [0-9]+
                     {
-                        p += line[i];
                         while (i < line.Length)
                         {
                             if (!IsNumeric(line[i].ToString()))
@@ -882,6 +880,10 @@ namespace CodeCheck.Page
         {
             if (s.Count == 1 || t.Count == 1)
                 return 0;
+            for(int i = 0;i < s.Count();++i)
+            {
+                System.Diagnostics.Debug.WriteLine(s[i]);
+            }
             return 200.0 * Block_Score(s, t) / (Total_Score(s, s) + Total_Score(t, t));
         }
 
@@ -922,23 +924,42 @@ namespace CodeCheck.Page
 
         protected void Bt_upload_Click(object sender, EventArgs e)
         {
-            if (Request.Files["file"].ContentLength > 0)
+            if(Request.Files.Count > 0)
             {
-                string FileName = Path.GetFileName(Request.Files["file"].FileName);
-                string type = FileName.Substring(FileName.LastIndexOf(".") + 1);
-                if (type == "cpp" || type == "java")
+                int count = 0;
+                HttpFileCollection UploadFiles = Request.Files;
+                for (int i = 0; i < UploadFiles.Count; i++)
                 {
-                    Request.Files["file"].SaveAs(Server.MapPath("../SingleFile/") + Path.GetFileName(Request.Files["file"].FileName));
-                    Upload_info.Text = "上传成功！";
+                    HttpPostedFile PostFiles = UploadFiles[i];
+                    try
+                    {
+                        if (PostFiles.ContentLength > 0)
+                        {
+                            Upload_info.Text += "文件 #" + (i + 1) + "：" + System.IO.Path.GetFileName(PostFiles.FileName);
+                            string FileName = PostFiles.FileName.Substring(PostFiles.FileName.LastIndexOf('/') + 1);
+                            string Extension = PostFiles.FileName.Substring(PostFiles.FileName.LastIndexOf('.') + 1);
+                            if (Extension.ToLower() == "cpp" || Extension.ToLower() == "java")
+                            {
+                                PostFiles.SaveAs(Server.MapPath("../SingleFile/") + System.IO.Path.GetFileName(PostFiles.FileName));
+                                count++;
+                            }
+                            else
+                            {
+                                Upload_info.Text += "发生错误，文件类型必须是cpp或者java！";
+                            }
+                            Upload_info.Text += " <br />";
+                        }
+                    }
+                    catch (Exception Ex)
+                    {
+                        Upload_info.Text += "发生错误： " + Ex.Message;
+                    }
                 }
-                else
-                {
-                    Upload_info.Text = "文件类型必须是cpp或者java！";
-                }
+                Upload_info.Text += count.ToString() + "个文件上传成功";
             }
             else
             {
-                Upload_info.Text = "请上传文件！";
+                Upload_info.Text = "请上传文件";
             }
         }
 
@@ -975,13 +996,11 @@ namespace CodeCheck.Page
                 double SimScore = CalculateSimScore.Sim_Run(GenerateToken.Read_file(files[0]), GenerateToken.Read_file(files[1]));
                 double DFAScore = CalculateDFAScore.Get_varsim(Markfile1, Markfile2);
 
-                double TotalScore = DFAScore * 0.4 + SimScore * 0.6;
-                //System.Diagnostics.Debug.WriteLine(Markfile1.Count());
+                double TotalScore = DFAScore * 0.0 + SimScore * 1.0;
                 Excute_info.Text = "  代码相似度：" + TotalScore.ToString() + "%";
             }
         }
         
-
         protected void Bt_upload_Click2(object sender, EventArgs e)
         {
             if(FileUpload1.HasFile)
