@@ -70,7 +70,7 @@ namespace CodeCheck.Page
         public string Identifier;
         public string Operator;
         public int Layer;
-        public bool[] mark;
+        public Dictionary<int, bool> mark = new Dictionary<int, bool>();
 
         public int IsOperator(char c)
         {
@@ -567,11 +567,13 @@ namespace CodeCheck.Page
         public double Get_varsim(List<VN> a, List<VN> b)
         {
             int samecnt = 0;
-            mark = new bool[100000];
+            mark.Clear();
             for (int i = 0; i < a.Count(); i++)
             {
                 for (int j = 0; j < b.Count(); j++)
                 {
+                    if (mark.ContainsKey(j) == false)
+                        mark.Add(j,false);
                     if (a[i].type == b[j].type && a[i].layer == b[j].layer && mark[j] == false)
                     {
                         int cnt = 0;
@@ -674,7 +676,7 @@ namespace CodeCheck.Page
 
         public static bool IsNumeric(string value)
         {
-            return Regex.IsMatch(value, @"^[+-]?/d*[.]?/d*$");
+            return Regex.IsMatch(value, @"^[0-9]*$");
         }
         public static bool IsWord(string input)
         {
@@ -688,94 +690,90 @@ namespace CodeCheck.Page
         {
             token.Clear();
             StreamReader fin = new StreamReader(path, Encoding.Default);
-            string line;
-            while ((line = fin.ReadLine()) != null)
+            string Content = fin.ReadToEnd();
+            int i = 0;
+            string buf = "";
+            string p = "";
+            while (i < Content.Length)
             {
-                string buf = "";
-                string p = "";
-                for (int i = 0; i < line.Length; ++i)
+                if (Content[i] <= ' ') { i++; continue; }                  // [\n\t ]
+                p = buf;
+                switch (Content[i])
                 {
-                    if (line[i] < ' ') continue;                  // [\n\t ]
-                    p = buf;
-                    switch (line[i])
-                    {
-                        case '+': token.Add(new Token((int)TokenValue.TOK_PLUS, "+")); break;
-                        case '-': token.Add(new Token((int)TokenValue.TOK_MINUS, "-")); break;
-                        case '*': token.Add(new Token((int)TokenValue.TOK_MINUS, "*")); break;
-                        case ';': token.Add(new Token((int)TokenValue.TOK_SEMICOLON, ";")); break;
-                        case '=': token.Add(new Token((int)TokenValue.TOK_EQUAL, "=")); break;
-                        case ',': token.Add(new Token((int)TokenValue.TOK_COMMA, ",")); break;
-                        case '{': token.Add(new Token((int)TokenValue.TOK_LMIB, "{")); break;
-                        case '}': token.Add(new Token((int)TokenValue.TOK_RMIB, "}")); break;
-                        case '(': token.Add(new Token((int)TokenValue.TOK_LPAR, "(")); break;
-                        case ')': token.Add(new Token((int)TokenValue.TOK_RPAR, ")")); break;
-                        case '[': token.Add(new Token((int)TokenValue.TOK_LSQU, "[")); break;
-                        case ']': token.Add(new Token((int)TokenValue.TOK_RSQU, "]")); break;
-                        case '<':
-                            if (i + 1 < line.Length && line[i + 1] == '=')
-                            {
-                                i++;
-                                token.Add(new Token((int)TokenValue.TOK_LE, "<="));
-                            }
-                            else
-                            {
-                                token.Add(new Token((int)TokenValue.TOK_LT, "<"));
-                            }
-                            break;
-                        case '>':
-                            if (i + 1 < line.Length && line[i + 1] == '=')
-                            {
-                                i++;
-                                token.Add(new Token((int)TokenValue.TOK_GE, ">="));
-                            }
-                            else
-                            {
-                                token.Add(new Token((int)TokenValue.TOK_GT, ">"));
-                            }
-                            break;
-                        case '!':
-                            if (i + 1 < line.Length && line[i + 1] == '=')
-                            {
-                                i++;
-                                token.Add(new Token((int)TokenValue.TOK_NE, "!="));
-                            }
-                            else
-                            {
-                                token.Add(new Token((int)TokenValue.TOK_NT, "!"));
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                    if (i < line.Length && IsWord(line[i].ToString()))                          // [A-Za-z][A-Za-z0-9],Start with a letter
-                    {
-                        while (i < line.Length)
+                    case '+': token.Add(new Token((int)TokenValue.TOK_PLUS, "+")); break;
+                    case '-': token.Add(new Token((int)TokenValue.TOK_MINUS, "-")); break;
+                    case '*': token.Add(new Token((int)TokenValue.TOK_MINUS, "*")); break;
+                    case ';': token.Add(new Token((int)TokenValue.TOK_SEMICOLON, ";")); break;
+                    case '=': token.Add(new Token((int)TokenValue.TOK_EQUAL, "=")); break;
+                    case ',': token.Add(new Token((int)TokenValue.TOK_COMMA, ",")); break;
+                    case '{': token.Add(new Token((int)TokenValue.TOK_LMIB, "{")); break;
+                    case '}': token.Add(new Token((int)TokenValue.TOK_RMIB, "}")); break;
+                    case '(': token.Add(new Token((int)TokenValue.TOK_LPAR, "(")); break;
+                    case ')': token.Add(new Token((int)TokenValue.TOK_RPAR, ")")); break;
+                    case '[': token.Add(new Token((int)TokenValue.TOK_LSQU, "[")); break;
+                    case ']': token.Add(new Token((int)TokenValue.TOK_RSQU, "]")); break;
+                    case '<':
+                        if (i + 1 < Content.Length && Content[i + 1] == '=')
                         {
-                            if (!(IsNumeric(line[i].ToString()) || IsWord(line[i].ToString()) || line[i] == '_'))    //Is a word, numeric, _
-                            {
-                                i--;
-                                break;
-                            }
-                            p += line[i];
                             i++;
+                            token.Add(new Token((int)TokenValue.TOK_LE, "<="));
                         }
-                        token.Add(new Token((int)TokenValue.TOK_ID, p));
-                    }
-                    if (i < line.Length && IsNumeric(line[i].ToString()))                   // [0-9]+
-                    {
-                        while (i < line.Length)
+                        else
                         {
-                            if (!IsNumeric(line[i].ToString()))
-                            {
-                                i--;
-                                break;
-                            }
-                            p += line[i];
-                            i++;
+                            token.Add(new Token((int)TokenValue.TOK_LT, "<"));
                         }
-                        token.Add(new Token((int)TokenValue.TOK_INTEGER, p));
-                    }
+                        break;
+                    case '>':
+                        if (i + 1 < Content.Length && Content[i + 1] == '=')
+                        {
+                            i++;
+                            token.Add(new Token((int)TokenValue.TOK_GE, ">="));
+                        }
+                        else
+                        {
+                            token.Add(new Token((int)TokenValue.TOK_GT, ">"));
+                        }
+                        break;
+                    case '!':
+                        if (i + 1 < Content.Length && Content[i + 1] == '=')
+                        {
+                            i++;
+                            token.Add(new Token((int)TokenValue.TOK_NE, "!="));
+                        }
+                        else
+                        {
+                            token.Add(new Token((int)TokenValue.TOK_NT, "!"));
+                        }
+                        break;
+                    default:
+                        break;
                 }
+                int flag = 0;
+                if (IsWord(Content[i].ToString()))                          // [A-Za-z],Start with a letter
+                {
+                    p += Content[i++];
+                    while (i < Content.Length && (IsNumeric(Content[i].ToString()) || IsWord(Content[i].ToString()) || Content[i] == '_')) //Is a word, numeric, _
+                    {
+                        p += Content[i];
+                        i++;
+                    }
+                    if (i == Content.Length) break;
+                    else flag = 1;
+                    token.Add(new Token((int)TokenValue.TOK_ID, p));
+                }
+                if (IsNumeric(Content[i].ToString()))                   // [0-9]+
+                {
+                    p += Content[i++];
+                    while (i < Content.Length && IsNumeric(Content[i].ToString()))
+                    {
+                        p += Content[i];
+                        i++;
+                    }
+                    if (i == Content.Length) break;
+                    else flag = 1;
+                    token.Add(new Token((int)TokenValue.TOK_INTEGER, p));
+                }
+                if(flag == 0) i++;
             }
             fin.Close();
             return token.Count();
@@ -846,7 +844,7 @@ namespace CodeCheck.Page
                 m_tot = 0;
                 if (s[i].Contains("TOK_LMIB"))
                 {
-                    if (stk.Count > 0)
+                    if (stk.Count == 0)
                     {
                         tmp.Add("#");
                         for (int j = tidx; j < i; j++)
@@ -859,9 +857,9 @@ namespace CodeCheck.Page
                 }
                 else if (s[i].Contains("TOK_RMIB"))
                 {
-                    if (stk.Count == 0)
-                        stk.Pop();
                     if (stk.Count > 0)
+                        stk.Pop();
+                    if (stk.Count == 0)
                     {
                         tmp.Add("#");
                         for (int j = tidx; j <= i; j++)
@@ -880,10 +878,6 @@ namespace CodeCheck.Page
         {
             if (s.Count == 1 || t.Count == 1)
                 return 0;
-            for(int i = 0;i < s.Count();++i)
-            {
-                System.Diagnostics.Debug.WriteLine(s[i]);
-            }
             return 200.0 * Block_Score(s, t) / (Total_Score(s, s) + Total_Score(t, t));
         }
 
@@ -992,11 +986,14 @@ namespace CodeCheck.Page
 
                 CalculateDFAScore.Get_VN(files[0], Markfile1);
                 CalculateDFAScore.Get_VN(files[1], Markfile2);
+                
+                System.Diagnostics.Debug.WriteLine(Markfile1.Count().ToString());
+                
 
                 double SimScore = CalculateSimScore.Sim_Run(GenerateToken.Read_file(files[0]), GenerateToken.Read_file(files[1]));
                 double DFAScore = CalculateDFAScore.Get_varsim(Markfile1, Markfile2);
 
-                double TotalScore = DFAScore * 0.0 + SimScore * 1.0;
+                double TotalScore = DFAScore * 1.0 + SimScore * 0.0;
                 Excute_info.Text = "  代码相似度：" + TotalScore.ToString() + "%";
             }
         }
