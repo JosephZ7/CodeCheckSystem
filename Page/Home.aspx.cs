@@ -40,7 +40,7 @@ namespace CodeCheck.Page
     class DFA
     {
         public const int MAX_STR = 2560;
-        public const int MAX_KEYWORDS = 16;
+        public const int MAX_KEYWORDS = 17;
         public const int MAX_OPERATORS = 12;
         public const int MAX_SEPARATORS = 15;
         public const int STA_START = 1;
@@ -62,7 +62,7 @@ namespace CodeCheck.Page
 
         public string[] Operators = { "+", "-", "*", "/", "%", "=", "==", "!=", "<", "<=", ">", ">=" };
         public string[] Separators = { ",", ";", ".", "\'", "\"", "(", ")", "[", "]", "{", "}", "//", "/*", "*/", "#" };
-        public string[] Keywords = { "if", "do", "while", "for", "double", "float", "bool", "char", "int", "long", "vector", "map", "stack", "queue", "pair", "string" };
+        public string[] Keywords = { "if", "do", "while", "for", "double", "float", "bool", "char", "int", "long", "vector", "map", "stack", "queue", "pair", "String", "string" };
 
         public Dictionary<string, int> ma = new Dictionary<string, int>();
         public string Keyword;
@@ -165,7 +165,9 @@ namespace CodeCheck.Page
                             tvn.name = str;
                             tvn.layer = Layer;
                             if (ma.ContainsKey(Identifier) == false)
-                                break;
+                            {
+                                ma.Add(Identifier, 0);
+                            }
                             if (Operator == "++")
                                 va[ma[Identifier]].items[4]++;
                             else if (Operator == "--")
@@ -182,12 +184,10 @@ namespace CodeCheck.Page
                             {
                                 tvn.name = Identifier;
                                 tvn.layer = Layer;
-                                if (ma.ContainsKey(Identifier) == true)
-                                    return;
-                                else
+                                if (ma.ContainsKey(Identifier) == false)
                                     ma.Add(Identifier, 0);
-                                if (va.Count == 0)
-                                    va.Add(new VN());
+                                if (ma[Identifier] == 0)
+                                    return;
                                 if (str[0] == '+')
                                     va[ma[Identifier]].items[4]++;
                                 else
@@ -993,7 +993,7 @@ namespace CodeCheck.Page
                 double SimScore = CalculateSimScore.Sim_Run(GenerateToken.Read_file(files[0]), GenerateToken.Read_file(files[1]));
                 double DFAScore = CalculateDFAScore.Get_varsim(Markfile1, Markfile2);
 
-                double TotalScore = DFAScore * 1.0 + SimScore * 0.0;
+                double TotalScore = DFAScore * 0.4 + SimScore * 0.6;
                 Excute_info.Text = "  代码相似度：" + TotalScore.ToString() + "%";
             }
         }
@@ -1089,10 +1089,6 @@ namespace CodeCheck.Page
             }
             else
             {
-                //for(int i = 0;i < files.Count();i++)
-                //{
-                //    System.Diagnostics.Debug.WriteLine(files[i]);
-                //}
                 TOKEN GenerateToken = new TOKEN();
                 Sim CalculateSimScore = new Sim();
                 DFA CalculateDFAScore = new DFA();
@@ -1149,7 +1145,7 @@ namespace CodeCheck.Page
         {
             Response.Clear();
             Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=CodeCheckResult.xls");
+            Response.AddHeader("content-disposition", "attachment;filename=CodeCheckResult.xlsx");
             Response.Charset = "";
             Response.ContentType = "application/vnd.ms-excel";
             using (StringWriter sw = new StringWriter())
