@@ -19,6 +19,9 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="highlight/Styles/SyntaxHighlighter.css" />
+
 </head>
 
 <body class="sticky-header">
@@ -26,41 +29,14 @@
     <!--Start left side Menu-->
     <div class="left-side sticky-left-side">
 
-        <!--logo-->
-        <div class="logo">
-            <a href="Home.aspx">
-                <img src="assets/images/logo.png" alt=""></a>
-        </div>
-
-        <div class="logo-icon text-center">
-            <a href="Home.aspx">
-                <img src="assets/images/logo-icon.png" alt=""></a>
-        </div>
-        <!--logo-->
 
         <div class="left-side-inner">
             <!--Sidebar nav-->
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li class="menu-list nav-active"><a href="Home.aspx"><i class="icon-home"></i><span>CodeCheck</span></a>
                     <ul class="sub-menu-list">
-                        <li class="active"><a href="Home.aspx">CodeSimilarity</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-list"><a href="#"><i class="icon-grid"></i><span>Tables</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="Table-static.aspx">Basic Table</a></li>
-                        <li><a href="Table-responsive.aspx">Responsive Table</a></li>
-                        <li><a href="Table-datatable.aspx">Data Tables</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-list"><a href="#"><i class="icon-lock"></i><span>Login</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="Login.aspx">Login </a></li>
-                        <li><a href="ForgotPassword.aspx">Forgot Password </a></li>
-                        <li><a href="Register.aspx">Registration </a></li>
-                        <li><a href="LockScreen.aspx">Lockscreen </a></li>
+                        <li class="active"><a href="Home.aspx">CheckFile</a></li>
+                        <li><a href="CheckFolder.aspx">CheckFolder</a></li>
                     </ul>
                 </li>
 
@@ -80,10 +56,6 @@
 
             <a class="toggle-btn"><i class="fa fa-bars"></i></a>
 
-            <form class="searchform">
-                <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
-            </form>
-
             <!--notification menu start -->
             <div class="menu-right">
                 <ul class="notification-menu">
@@ -95,13 +67,10 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                            <li><a href="#"><i class="fa fa-wrench"></i>Settings </a></li>
-                            <li><a href="#"><i class="fa fa-user"></i>Profile </a></li>
-                            <li><a href="#"><i class="fa fa-info"></i>Help </a></li>
-                            <li><a href="#"><i class="fa fa-lock"></i>Logout </a></li>
+                            <li><a href="Index.aspx"><i class="fa fa-info"></i>Help </a></li>
+                            <li><a href="LogoutHandler.ashx"><i class="fa fa-lock"></i>Logout </a></li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
             <!--notification menu end -->
@@ -128,110 +97,89 @@
             <form action="#" id="Form1" enctype="multipart/form-data" runat="server" method="post">
 
 
-            <!--Start row-->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="white-box">
-                        <h2 class="header-title">Single File Check（选择两个单文件对比）</h2>
-                        <div class="fallback">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <input id="UpLoad" type="file" name="file" multiple="multiple" />
-                                    </td>
-                                    <td>
-                                        <asp:Button ID="bt_upload" class="btn btn-info" runat="server" OnClick="Bt_upload_Click" Text="上传" />
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="Upload_info" runat="server" ForeColor="Red" Width="300px"></asp:Label>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <br />
-                        <!-- /.checkbox -->
-                        <p>下列勾选查重的语言</p>
-                        <div class="checkbox primary">
-                            <input type="checkbox" checked id="checkbox-2">
-                            <label for="checkbox-2">C++</label>
-                        </div>
-                        <!-- /.checkbox -->
+                <!--Start row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h2 class="header-title">Single File Check（选择两个单文件对比）</h2>
+                            <div class="fallback">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input id="UpLoad" type="file" name="file" multiple="multiple" />
+                                        </td>
+                                        <td>
+                                            <asp:Button ID="bt_upload" class="btn btn-info" runat="server" OnClick="Bt_upload_Click" Text="上传" />
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Upload_info" runat="server" ForeColor="Red" Width="300px"></asp:Label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br />
 
-                        <div class="checkbox success">
-                            <input type="checkbox" checked id="checkbox-3">
-                            <label for="checkbox-3">Java</label>
-                        </div>
-                        <!-- /.checkbox -->
-                        
-                        <h4 class="header-title">Run Program</h4>
-                        <div class="button-wrap">
-                             
-                            <asp:Button ID="bt_excute" class="btn btn-primary" runat="server" OnClick="Bt_excute_Click" Text="运行" />
+                            <h2 class="header-title">选择查重编程语言</h2>
+                            <asp:HiddenField ID="rad_indexer" runat="server" Value="rad_id"  />
+                            <div class="radio warning">
+                              <input type="radio" id="radio-1" name="lang" value="c" onclick="save()">
+                              <label for="radio-1">C</label>
+                            </div>
+                    
+                            <div class="radio primary">
+                              <input type="radio" id="radio-2" name="lang" value="cpp" onclick="save()">
+                              <label for="radio-2">C++</label>
+                            </div>
+                    
+                            <div class="radio success">
+                              <input type="radio" id="radio-3" name="lang" value="java" onclick="save()">
+                              <label for="radio-3">Java</label>
+                            </div>
+                    
+                            <div class="radio info">
+                              <input type="radio" id="radio-4" name="lang" value="cs" onclick="save()">
+                              <label for="radio-4">C#</label>
+                            </div>
 
-                            <asp:Label ID="Excute_info" runat="server" ForeColor="Red"></asp:Label>
+                            <div class="button-wrap">
+                                <asp:Button ID="bt_excute" class="btn btn-primary" runat="server" OnClick="Bt_excute_Click" Text="运行" />
+                                <asp:Label ID="Excute_info" runat="server" ForeColor="Red"></asp:Label>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!--End row-->
+                
 
-
-                <div class="col-md-6">
-                    <div class="white-box">
-                        <h2 class="header-title">Multi Files Check（对文件夹里的所有文件对比）</h2>
-                        <div class="fallback">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <asp:FileUpload ID="FileUpload1" runat="server" webkitdirectory=""  />
-                                    </td>
-                                    <td>
-                                        <asp:Button ID="Button1" class="btn btn-info" runat="server" OnClick="Bt_upload_Click2" Text="上传" />
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="Label2" runat="server" ForeColor="Red" Width="300px"></asp:Label>
-                                    </td>
-                                </tr>
-                            </table>
+                <!--Start row-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="white-box">
+                            <h2 class="header-title">
+                                <asp:Label ID="Label3" runat="server" Text="FileName"></asp:Label>
+                            </h2> 
+                            <asp:Literal ID="Literal1" runat="server"></asp:Literal>
                         </div>
-                        <!-- /.checkbox -->
-                        <br />
-                        <p>下列勾选查重的语言</p>
-                        <div class="checkbox circled primary">
-                            <input type="checkbox" checked id="checkbox-circled-2">
-                            <label for="checkbox-circled-2">C++</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <div class="checkbox circled success">
-                            <input type="checkbox" checked id="checkbox-circled-3">
-                            <label for="checkbox-circled-3">Java</label>
-                        </div>
-                        <!-- /.checkbox -->
-
-                        <h4 class="header-title">Run Program</h4>
-                        <div class="button-wrap">
-                             
-                            <asp:Button ID="Button2" class="btn btn-purple" runat="server" OnClick="Bt_excute_Click2" Text="运行" />
-                            <asp:LinkButton ID="LinkButton1" runat="server" class="btn btn-success" OnClick="LinkButton1_Click">下载结果</asp:LinkButton>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="white-box">
+                            <h2 class="header-title">
+                                <asp:Label ID="Label2" runat="server" Text="FileName"></asp:Label>
+                            </h2>
+                            <asp:Literal ID="Literal2" runat="server"></asp:Literal>
                         </div>
                     </div>
                 </div>
-                <div class="clear"></div>
-            </div>
-            <!-- end row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="white-box">
-                        <asp:GridView ID="GridView1" runat="server"></asp:GridView>
-                    </div>
-                </div>
-            </div>
+                <!--End row-->
+
+
             </form>
         </div>
         <!-- End Wrapper-->
 
 
         <!--Start  Footer -->
-        <footer class="footer-main">Copyright &copy; 2018.Company name All rights reserved.</footer>
+        <footer class="footer-main">Copyright &copy; 2019.CUIT All rights reserved.</footer>
         <!--End footer -->
 
     </div>
@@ -254,6 +202,45 @@
     <script src="assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
     <script src="assets/pages/dashboard.js"></script>
     <!--End Page Level Plugin-->
+
+    <script class="javascript" src="highlight/Scripts/shCore.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushCSharp.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushPhp.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushJScript.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushJava.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushVb.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushSql.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushXml.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushDelphi.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushPython.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushRuby.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushCss.js"></script> 
+    <script class="javascript" src="highlight/Scripts/shBrushCpp.js"></script> 
+    <script class="javascript"> 
+    dp.SyntaxHighlighter.HighlightAll('code'); 
+    </script>
+
+    <script class="javascript"> 
+        
+        function save() {
+            radios = document.getElementsByName("lang");
+            for (i = 0; i < radios.length; i++) {
+                if (radios[i].checked) document.cookie = 'radioindex =' + i;
+            }
+        }
+        window.onload = function () {
+            var cooki = document.cookie;
+            if (cooki != "") {
+                cooki = "{\"" + cooki + "\"}";
+                cooki = cooki.replace(/\s*/g, "").replace(/=/g, '":"').replace(/;/g, '","');
+                var json = eval("(" + cooki + ")"); //将coolies转成json对象
+                document.getElementsByName("lang")[json.radioindex].checked = true;
+            }
+            else
+                save();
+        }
+    </script>
+
 
 </body>
 

@@ -19,7 +19,7 @@ namespace CodeCheck.Page
             string UserName = TextBox1.Text;
             string Password = TextBox2.Text;
 
-            string str = "server=(local)\\SQLSERVER;database=CodeCheck;uid=DESKTOP-4GRJ6EF;pwd=;Trusted_Connection=yes";
+            string str = "Data Source=(local)\\SQLSERVER;Initial Catalog=CodeCheck;User ID=sa;Password=zl78951237";
             SqlConnection conn = new SqlConnection(str);
             conn.Open();
 

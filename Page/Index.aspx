@@ -27,38 +27,38 @@
 <!-- /OpenGraph meta -->
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="assets/img/favicon.png">
+<link rel="shortcut icon" href="Page/assets/img/favicon.png">
 <!-- /Favicon -->
 
 <!-- Styles -->
-<link rel="stylesheet" href="assets/components/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/components/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="assets/components/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/components/elegant-font/style.css">
-<link rel="stylesheet" href="assets/components/owl-carousel/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="assets/components/owl-carousel/assets/owl.theme.default.min.css">
-<link rel="stylesheet" href="assets/components/sweetalert/sweetalert.css">
-<link rel="stylesheet" href="assets/css/magnific-popup.css">
-<link rel="stylesheet" href="assets/css/theme.css" title="theme-default">
+<link rel="stylesheet" href="Page/assets/components/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="Page/assets/components/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="Page/assets/components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="Page/assets/components/elegant-font/style.css">
+<link rel="stylesheet" href="Page/assets/components/owl-carousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="Page/assets/components/owl-carousel/assets/owl.theme.default.min.css">
+<link rel="stylesheet" href="Page/assets/components/sweetalert/sweetalert.css">
+<link rel="stylesheet" href="Page/assets/css/magnific-popup.css">
+<link rel="stylesheet" href="Page/assets/css/theme.css" title="theme-default">
 <!-- /Styles -->
 
 <!-- TODO: select one of the presented -->
 <!-- Predefined Schemes -->
-<link rel="alternate stylesheet" href="assets/css/theme-dulllavender-light.css" title="theme-dulllavender-light">
-<link rel="alternate stylesheet" href="assets/css/theme-dulllavender.css"       title="theme-dulllavender">
-<link rel="alternate stylesheet" href="assets/css/theme-dulllavender-dark.css"  title="theme-dulllavender-dark">
-<link rel="alternate stylesheet" href="assets/css/theme-nepal-light.css"        title="theme-nepal-light">
-<link rel="alternate stylesheet" href="assets/css/theme-nepal.css"              title="theme-nepal">
-<link rel="alternate stylesheet" href="assets/css/theme-nepal-dark.css"         title="theme-nepal-dark">
-<link rel="alternate stylesheet" href="assets/css/theme-tradewind-light.css"    title="theme-tradewind-light">
-<link rel="alternate stylesheet" href="assets/css/theme-tradewind.css"          title="theme-tradewind">
-<link rel="alternate stylesheet" href="assets/css/theme-tradewind-dark.css"     title="theme-tradewind-dark">
-<link rel="alternate stylesheet" href="assets/css/theme-tanhide-light.css"      title="theme-tanhide-light">
-<link rel="alternate stylesheet" href="assets/css/theme-tanhide.css"            title="theme-tanhide">
-<link rel="alternate stylesheet" href="assets/css/theme-tanhide-dark.css"       title="theme-tanhide-dark">
-<link rel="alternate stylesheet" href="assets/css/theme-burntsienna-light.css"  title="theme-burntsienna-light">
-<link rel="alternate stylesheet" href="assets/css/theme-burntsienna.css"        title="theme-burntsienna">
-<link rel="alternate stylesheet" href="assets/css/theme-burntsienna-dark.css"   title="theme-burntsienna-dark">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-dulllavender-light.css" title="theme-dulllavender-light">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-dulllavender.css"       title="theme-dulllavender">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-dulllavender-dark.css"  title="theme-dulllavender-dark">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-nepal-light.css"        title="theme-nepal-light">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-nepal.css"              title="theme-nepal">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-nepal-dark.css"         title="theme-nepal-dark">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-tradewind-light.css"    title="theme-tradewind-light">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-tradewind.css"          title="theme-tradewind">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-tradewind-dark.css"     title="theme-tradewind-dark">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-tanhide-light.css"      title="theme-tanhide-light">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-tanhide.css"            title="theme-tanhide">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-tanhide-dark.css"       title="theme-tanhide-dark">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-burntsienna-light.css"  title="theme-burntsienna-light">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-burntsienna.css"        title="theme-burntsienna">
+<link rel="alternate stylesheet" href="Page/assets/css/theme-burntsienna-dark.css"   title="theme-burntsienna-dark">
 <!-- /Predefined Schemes --> 
 
 </head>
@@ -85,7 +85,7 @@
 
 		<!-- CAROUSEL SLIDE -->
 		<div class="slide fullscreen bg-cover mask mask-black"
-			 style="background-image: url(assets/images/default/bg-carousel-01.jpg)">
+			 style="background-image: url(Page/assets/images/default/bg-carousel-01.jpg)">
 
 			<!-- Vertical Middle Block -->
 			<div class="vertical-middle mask-after">
@@ -128,7 +128,7 @@
 							<a href="#features" class="btn btn-lg btn-squared btn-white btn-o text-uppercase smooth-scroll">特性</a>
 						</div>
 						<div class="col-xs-6">
-							<a href="Login.aspx" class="btn btn-lg btn-squared btn-base text-uppercase smooth-scroll">登录</a>
+							<a href="Page/Login.aspx" class="btn btn-lg btn-squared btn-base text-uppercase smooth-scroll">登录</a>
 						</div>
 
 					</div>
@@ -156,11 +156,10 @@
 				 data-reveal-duration="600">
 
 				<span class="icon icon_link_alt"></span>
-				<div class="title text-dark">支持C/C++和Java文件的代码查重</div>
+				<div class="title text-dark">支持C/C++文件的代码查重</div>
 				<div class="description">
 					可能在未来会加入更多不同的格式
 				</div>
-				<a href="#" class="btn btn-base">了解更多</a>
 
 			</div>
 			<!-- /ICON BOX: Clean Design -->
@@ -175,7 +174,6 @@
 				<div class="description">
 					使用快速高效SIM算法查重
 				</div>
-				<a href="#" class="btn btn-base">了解更多</a>
 
 			</div>
 			<!-- /ICON BOX: Mobile Friendly -->
@@ -187,9 +185,8 @@
 				<span class="icon icon_pens"></span>
 				<div class="title text-dark">针对多个文件同时查重</div>
 				<div class="description">
-					选择一个文件夹，然后程序自动获取后缀为.cpp和.java的文件然后两两对应格式进行查重
+					选择一个文件夹，然后程序自动获取后缀为.cpp的文件然后两两对应格式进行查重
 				</div>
-				<a href="#" class="btn btn-base">了解更多</a>
 
 			</div>
 			<!-- /ICON BOX: Well Documented -->
@@ -203,7 +200,7 @@
 
 <!-- SECTION: Code Check -->
 <section id="CodeCheck" class="section text-white bg-center-top bg-fixed mask mask-black xs-text-center"
-		 style="background-image: url(assets/images/default/bg-video.jpg)">
+		 style="background-image: url(Page/assets/images/default/bg-video.jpg)">
 	<div class="container mask-after">
 
 		<!-- Section Content -->
@@ -312,7 +309,7 @@
 
 <!-- SECTION: Contact -->
 <section id="contact" class="section bg-center-top mask mask-black text-white"
-		 style="background-image: url(assets/images/default/bg-contact.jpg)" data-stellar-background-ratio="0.4">
+		 style="background-image: url(Page/assets/images/default/bg-contact.jpg)" data-stellar-background-ratio="0.4">
 	<div class="container mask-after">
 
 		<!-- Section Header -->
@@ -402,19 +399,19 @@
 <!-- /MAIN CONTAINER -->
 
 <!-- SCRIPTS -->
-<script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/components/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/components/owl-carousel/owl.carousel.min.js"></script>
-<script src="assets/components/sweetalert/sweetalert.min.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/jquery.stellar.min.js"></script>
-<script src="assets/js/jquery.appear.js"></script>
-<script src="assets/js/jquery.animateNumber.min.js"></script>
-<script src="assets/js/circle-progress.min.js"></script>
-<script src="assets/js/jquery.validate.min.js"></script>
-<script src="assets/js/masonry.pkgd.min.js"></script>
-<script src="assets/js/scrollreveal.js"></script>
-<script src="assets/js/general.js"></script>
+<script src="Page/assets/js/jquery-2.2.0.min.js"></script>
+<script src="Page/assets/components/bootstrap/js/bootstrap.min.js"></script>
+<script src="Page/assets/components/owl-carousel/owl.carousel.min.js"></script>
+<script src="Page/assets/components/sweetalert/sweetalert.min.js"></script>
+<script src="Page/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="Page/assets/js/jquery.stellar.min.js"></script>
+<script src="Page/assets/js/jquery.appear.js"></script>
+<script src="Page/assets/js/jquery.animateNumber.min.js"></script>
+<script src="Page/assets/js/circle-progress.min.js"></script>
+<script src="Page/assets/js/jquery.validate.min.js"></script>
+<script src="Page/assets/js/masonry.pkgd.min.js"></script>
+<script src="Page/assets/js/scrollreveal.js"></script>
+<script src="Page/assets/js/general.js"></script>
 <!-- /SCRIPTS -->
 
 <!-- TODO: Remove this block, DEMO only -->

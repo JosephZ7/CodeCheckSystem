@@ -15,13 +15,6 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet">
-    
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-          <script src="js/html5shiv.min.js"></script>
-          <script src="js/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -33,26 +26,18 @@
            <div class="row">
                <div class="login-wrapper">
                    <div class="login-inner">
-                       
-                       <div class="logo">
-                         <img src="assets/images/logo-dark.png"  alt="logo"/>
-                       </div>
-                   		
-                       <form>
+                       <form runat="server">
                          <label class="text-center m-b-25">Enter your email address below to reset your password</label>
                            <div class="form-group">
-                               <input type="password" class="form-control" >
+                               <asp:TextBox runat="server" type="text" name="Email" id="Email" class="form-control" />
+                               <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="Email" runat="server" ErrorMessage="Email 格式不对！" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                            </div>
                            
                            <div class="form-group">
-                               <input type="submit" value="Submit" class="btn btn-primary btn-block" >
+                               <asp:Button ID="Button1" runat="server" Text="Submit" class="btn btn-primary btn-block" OnClick="Button1_Click" />
                            </div>
                            
                        </form>
-                       
-                        <div class="copy-text"> 
-                         <p class="m-0">2017 &copy; Meter admin</p>
-                        </div>
                     
                    </div>
                </div>
@@ -62,13 +47,11 @@
    </section>
   <!--End login Section-->
 
-
-
     <!--Begin core plugin -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/plugins/moment/moment.js"></script>
-    <script  src="assets/js/jquery.slimscroll.js "></script>
+    <script src="assets/js/jquery.slimscroll.js "></script>
     <script src="assets/js/jquery.nicescroll.js"></script>
     <script src="assets/js/functions.js"></script>
     <!-- End core plugin -->

@@ -44,12 +44,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -131,8 +136,36 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Page\DownloadExcel.aspx" />
+    <Content Include="Page\CheckFolder.aspx" />
     <Content Include="Page\ForgotPassword.aspx" />
+    <Content Include="Page\highlight\Scripts\clipboard.swf" />
+    <Content Include="Page\highlight\Scripts\shBrushCpp.js" />
+    <Content Include="Page\highlight\Scripts\shBrushCSharp.js" />
+    <Content Include="Page\highlight\Scripts\shBrushCss.js" />
+    <Content Include="Page\highlight\Scripts\shBrushDelphi.js" />
+    <Content Include="Page\highlight\Scripts\shBrushJava.js" />
+    <Content Include="Page\highlight\Scripts\shBrushJScript.js" />
+    <Content Include="Page\highlight\Scripts\shBrushPhp.js" />
+    <Content Include="Page\highlight\Scripts\shBrushPython.js" />
+    <Content Include="Page\highlight\Scripts\shBrushRuby.js" />
+    <Content Include="Page\highlight\Scripts\shBrushSql.js" />
+    <Content Include="Page\highlight\Scripts\shBrushVb.js" />
+    <Content Include="Page\highlight\Scripts\shBrushXml.js" />
+    <Content Include="Page\highlight\Scripts\shCore.js" />
+    <Content Include="Page\highlight\Styles\SyntaxHighlighter.css" />
+    <Content Include="Page\highlight\Uncompressed\shBrushCpp.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushCSharp.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushCss.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushDelphi.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushJava.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushJScript.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushPhp.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushPython.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushRuby.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushSql.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushVb.js" />
+    <Content Include="Page\highlight\Uncompressed\shBrushXml.js" />
+    <Content Include="Page\highlight\Uncompressed\shCore.js" />
     <Content Include="Page\Home.aspx" />
     <Content Include="Page\Index.aspx" />
     <Content Include="Page\assets\components\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -145,6 +178,9 @@
     <Content Include="Page\assets\components\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Page\assets\components\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="Page\assets\components\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Page\LogoutHandler.ashx" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Page\assets\components\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Page\assets\components\bootstrap\css\bootstrap.min.css" />
@@ -205,14 +241,10 @@
     <Content Include="Page\assets\js\jquery.validate.min.js" />
     <Content Include="Page\assets\js\masonry.pkgd.min.js" />
     <Content Include="Page\assets\js\scrollreveal.js" />
-    <Content Include="Page\LockScreen.aspx" />
     <Content Include="Page\Login.aspx" />
     <Content Include="Page\ProgressBar.html" />
     <Content Include="Page\Register.aspx" />
     <Content Include="Page\ResetPassword.aspx" />
-    <Content Include="Page\Table-datatable.aspx" />
-    <Content Include="Page\Table-responsive.aspx" />
-    <Content Include="Page\Table-static.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -256,12 +288,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Page\DownloadExcel.aspx.cs">
-      <DependentUpon>DownloadExcel.aspx</DependentUpon>
+    <Compile Include="Page\Algorithm.cs" />
+    <Compile Include="Page\CheckFolder.aspx.cs">
+      <DependentUpon>CheckFolder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Page\DownloadExcel.aspx.designer.cs">
-      <DependentUpon>DownloadExcel.aspx</DependentUpon>
+    <Compile Include="Page\CheckFolder.aspx.designer.cs">
+      <DependentUpon>CheckFolder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Page\ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
@@ -283,19 +316,15 @@
     <Compile Include="Page\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Page\LockScreen.aspx.cs">
-      <DependentUpon>LockScreen.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Page\LockScreen.aspx.designer.cs">
-      <DependentUpon>LockScreen.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Page\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Page\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Page\LogoutHandler.ashx.cs">
+      <DependentUpon>LogoutHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Page\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -310,27 +339,6 @@
     </Compile>
     <Compile Include="Page\ResetPassword.aspx.designer.cs">
       <DependentUpon>ResetPassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Page\Table-datatable.aspx.cs">
-      <DependentUpon>Table-datatable.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Page\Table-datatable.aspx.designer.cs">
-      <DependentUpon>Table-datatable.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Page\Table-responsive.aspx.cs">
-      <DependentUpon>Table-responsive.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Page\Table-responsive.aspx.designer.cs">
-      <DependentUpon>Table-responsive.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Page\Table-static.aspx.cs">
-      <DependentUpon>Table-static.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Page\Table-static.aspx.designer.cs">
-      <DependentUpon>Table-static.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

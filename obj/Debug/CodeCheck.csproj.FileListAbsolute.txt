@@ -75,3 +75,5 @@ E:\ProgramFiles\CodeCheckSystem\CodeCheck\CodeCheck\obj\Debug\CodeCheck.csproj.C
 E:\ProgramFiles\CodeCheckSystem\CodeCheck\CodeCheck\obj\Debug\CodeCheck.csproj.CopyComplete
 E:\ProgramFiles\CodeCheckSystem\CodeCheck\CodeCheck\obj\Debug\CodeCheck.dll
 E:\ProgramFiles\CodeCheckSystem\CodeCheck\CodeCheck\obj\Debug\CodeCheck.pdb
+E:\ProgramFiles\CodeCheckSystem\CodeCheck\CodeCheck\bin\EPPlus.dll
+E:\ProgramFiles\CodeCheckSystem\CodeCheck\CodeCheck\bin\EPPlus.xml

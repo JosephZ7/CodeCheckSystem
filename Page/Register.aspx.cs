@@ -35,6 +35,17 @@ namespace CodeCheck.Page
             else
             {
                 sdr.Close();
+                string EmailSql = "select * from CodeCheck where Email='" + Email + "'";
+                SqlCommand commEmail = new SqlCommand(sql, conn);
+                SqlDataReader sdrEmail = comm.ExecuteReader();
+                if (sdrEmail.Read())
+                {
+                    sdrEmail.Close();
+                    Response.Write("<script>alert('邮件已被注册');location.href='Register.aspx';</script>");
+                    return;
+                }
+                sdrEmail.Close();
+
                 string InsertSql = "INSERT INTO CodeCheck(UserName, Password, Email) VALUES('" + UserName + "','" + Password + "','" + Email + "')";
                 SqlCommand InsertCmd = new SqlCommand(InsertSql, conn);
                 try
