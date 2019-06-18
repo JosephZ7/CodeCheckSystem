@@ -17,3 +17,9 @@ highlighting to show the code on the website page, calculate the code similarity
 the code file to run the calculation and download the result file.
 
 Address: http://192.168.191.1:82/
+
+## 用法
+* 1.首先登录进入后台查重管理
+* 2.选择查重方式，包括对两个单文件查重和文件夹查重
+* 3.再选择查重的语言，包括对C\C++、C#和Java的查重
+* 4.运行程序，可以直接在网页上看到结果，也可下载结果文件。
