@@ -15,3 +15,5 @@ and at the same time implement the filtering of the calculation result by the us
 scientist Dick Grune's SIM check tool between 1% and 5%. When the teacher checks the student's code assignments, system can use code 
 highlighting to show the code on the website page, calculate the code similarity accurately and efficiently, and easy to use. Just upload 
 the code file to run the calculation and download the result file.
+
+Address: http://192.168.191.1:82/
